@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Hero } from '../../hero';
 import { HeroService } from '../../services/hero.service';
 
 @Component({
@@ -24,6 +23,11 @@ export class HeroDetailComponent implements OnInit {
             let id = +params['id'];
             this.heroService.getHero(id).then(hero => this.hero = hero);
         });
+    }
+
+    public save(): void {
+        this.heroService.update(this.hero)
+            .then(() => this.goBack());
     }
 
     public goBack(): void {
